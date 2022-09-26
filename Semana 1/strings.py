@@ -1,0 +1,5 @@
+nombre = input("Enter your full name: ")
+nombrepegao = nombre.lower()
+print(nombrepegao)
+print(nombrepegao.upper())
+print(nombrepegao.title())
