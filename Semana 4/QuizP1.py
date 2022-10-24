@@ -95,10 +95,37 @@ products = {
     },
 }
 
-for type, brands in products.items():
-    print(type)
-    for product, item in brands.items():
-        print(product)
-        for order in item:
-            print("El producto {} tiene un costo de {}$"
-            .format(order["name"], order["price"]))
+while True:
+    selector=input("Please enter a valid option:\n1-Show product list\n2-Buy\n3-Add coupon\n4-Exit\n->")
+    if selector == "1":
+        for type, brands in products.items():
+            for product, item in brands.items():
+                for order in item:
+                    print("{}) {} - {}$"
+                    .format(order["id"], order["name"], order["price"]))
+    elif selector == "4":
+        break
+    elif selector == "2":
+        product_to_buy=int(input("Please enter the item number (can be checked on the product list): "))
+        product_selected: None
+        client_info={}
+        for type, brands in products.items():
+            for product, item in brands.items():
+                for order in item:
+                    if order.get("id") == product_to_buy:
+                        product_selected=order
+        if product_selected == None:
+            print("Product not found")
+            continue
+        else:
+            client_info["name"] = input("Please enter your name: ")
+            client_info["lastname"] = input("Please enter your last name: ")
+            client_info["id_number"] = input("Please enter your ID number: ")
+            client_info["product_id"] = product_to_buy
+        
+        print("***** RECEIPT ******")
+        print("Name:",client_info.get("name"))
+        print("Lastname:",client_info.get("lastname"))
+        print("Id Card:",client_info.get("id_card"))
+        print("Product:",product_selected.get("name"))
+        print("Total:",product_selected.get("price"))
